@@ -86,3 +86,13 @@ sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/
 sudo service ssh restart
 
 docker login -u wayuslatan -p Parn.5907123
+
+mkdir /etc/systemd/system/docker.service.d
+cat <<EOT >> docker.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+EOT
+
+systemctl daemon-reload
+systemctl restart docker.service

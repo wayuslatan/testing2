@@ -1,1 +1,0 @@
-{"virtualbox":{"/mnt":{"guestpath":"/mnt","hostpath":"D:/shared","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/vagrant/K8S","disabled":false,"__vagrantfile":true}}}
