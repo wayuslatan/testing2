@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
   run: "always",
   inline: "eval `route -n | awk '{ if ($8 ==\"eth0\" && $2 != \"0.0.0.0\") print \"route del default gw \" $2; }'`"
 
-  config.vm.synced_folder "../shared", "/mnt"
+  config.vm.synced_folder "D:/shared", "/mnt"
   #config.vm.provision "shell",
   #inline: "sudo mount.cifs //192.168.2.35/shared /mnt -o user=worawat,password=1234"
 	
