@@ -1,0 +1,38 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.provision "shell", path: "bootstrap.sh"
+
+  config.vm.define "kmaster" do |kmaster|
+    kmaster.vm.box = "ubuntu/xenial64"
+    kmaster.vm.hostname = "kmaster.wayuslatan.com"
+    kmaster.vm.network "public_network", type: "dhcp"
+    kmaster.vm.provider "virtualbox" do |v|
+      v.name = "kmaster"
+      v.memory = 2048
+      v.cpus = 2
+    end
+    config.vm.synced_folder "D:/shared", "/mnt"
+    kmaster.vm.provision "shell", path: "bootstrap_kmaster.sh"
+  end
+
+NodeCount = 2
+
+  # Kubernetes Worker Nodes
+  (1..NodeCount).each do |i|
+    config.vm.define "kslave#{i}" do |kslave|
+      kslave.vm.box = "ubuntu/xenial64"
+      kslave.vm.hostname = "kslave#{i}.wayuslatan.com"
+      kslave.vm.network "public_network", type: "dhcp"
+      kslave.vm.provider "virtualbox" do |v|
+        v.name = "kslave#{i}"
+        v.memory = 1024
+        v.cpus = 1
+      end
+      config.vm.synced_folder "D:/shared", "/mnt"
+      kslave.vm.provision "shell", path: "bootstrap_kslave.sh"
+    end
+  end
+end
