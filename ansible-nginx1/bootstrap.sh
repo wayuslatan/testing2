@@ -2,6 +2,7 @@
 
 echo "[TASK 1] add new default routing, delete routing on eth0"
 sudo route add default gw 192.168.2.1
+sudo route del default dev enp0s3
 
 echo "[TASK 2] Update System"
 sudo apt-get -y update
