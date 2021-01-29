@@ -5,16 +5,19 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", path: "bootstrap.sh"
 
-  config.vm.define "ansible-nginx1" do |ansible-nginx1|
-    ansible-nginx1.vm.box = "ubuntu/xenial64"
-    ansible-nginx1.vm.hostname = "ansible-nginx1"
-    ansible-nginx1.vm.network "public_network", type: "dhcp"
-    ansible-nginx1.vm.provider "virtualbox" do |v|
-      v.name = "ansible-nginx1"
+  config.vm.define "ansiblenginx1" do |ansiblenginx1|
+    ansiblenginx1.vm.box = "ubuntu/xenial64"
+    ansiblenginx1.vm.hostname = "ansiblenginx1"
+    ansiblenginx1.vm.network "public_network", type: "dhcp"
+    ansiblenginx1.vm.provider "virtualbox" do |v|
+      v.name = "ansiblenginx1"
       v.memory = 2048
       v.cpus = 2
     end
-    #ansible-nginx1.vm.provision "shell", path: "bootstrap_ansible-nginx1.sh"
+    #ansiblenginx1.vm.provision "shell", path: "bootstrap_ansiblenginx1.sh"
+    config.vm.provision "shell",
+      run: "always",
+      inline: "eval `route -n | awk '{ if ($8 ==\"eth0\" && $2 != \"0.0.0.0\") print \"route del default gw \" $2; }'`"
     config.vm.synced_folder "D:/shared", "/mnt"
   end
 end
