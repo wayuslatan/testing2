@@ -1,13 +1,9 @@
 #!/bin/bash
 
-# Update hosts file
-echo "[TASK 1] Update /etc/hosts file"
-cat >>/etc/hosts<<EOF
-172.42.42.100 kmaster.example.com kmaster
-172.42.42.101 kworker1.example.com kworker1
-172.42.42.102 kworker2.example.com kworker2
-EOF
-
+# default router
+route add default gw 192.168.2.1
+# delete default gw on eth0
+eval `route -n | awk '{ if ($8 ==\"eth0\" && $2 != \"0.0.0.0\") print \"route del default gw \" $2; }'`
 
 echo "[TASK 2] Install docker container engine"
 apt-get install apt-transport-https ca-certificates curl software-properties-common -y
@@ -23,6 +19,9 @@ usermod -aG docker vagrant
 echo "[TASK 3] Enable and start docker service"
 systemctl enable docker >/dev/null 2>&1
 systemctl start docker
+
+systemctl stop ufw
+systemctl disable ufw
 
 # Add sysctl settings
 echo "[TASK 6] Add sysctl settings"
