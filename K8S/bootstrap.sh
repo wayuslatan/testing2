@@ -1,5 +1,12 @@
 #!/bin/bash
 
+echo "[TASK 1] Update /etc/hosts file"
+cat >>/etc/hosts<<EOF
+192.168.2.100 kmaster.wayuslatan.com kmaster
+192.168.2.101 kslave1.wayuslatan.com kslave1
+192.168.2.102 kslave2.wayuslatan.com kslave2
+EOF
+
 sudo route add default gw 192.168.2.1
 sudo route del default dev enp0s3
 
@@ -56,6 +63,12 @@ apt-get install -y kubelet kubeadm kubectl
 systemctl enable kubelet >/dev/null 2>&1
 systemctl start kubelet >/dev/null 2>&1
 
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 systemctl restart sshd
 
@@ -63,3 +76,13 @@ echo -e "kubeadmin\nkubeadmin" | passwd root
 
 # Update vagrant user's bashrc file
 echo "export TERM=xterm" >> /etc/bashrc
+
+cp /etc/ssh/sshd_config /etc/ssh/backup.sshd_config.backup
+
+#sed -i 's/old-text/new-text/g' /etc/ssh/sshd_config
+sudo sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+
+sudo service ssh restart
+
+docker login -u wayuslatan -p Parn.5907123
