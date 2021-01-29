@@ -29,8 +29,8 @@ NodeCount = 2
       kslave.vm.network "public_network", ip: "192.168.2.10#{i}"
       kslave.vm.provider "virtualbox" do |v|
         v.name = "kslave#{i}"
-        v.memory = 1024
-        v.cpus = 1
+        v.memory = 2048
+        v.cpus = 2
       end
       config.vm.synced_folder "D:/shared", "/mnt"
       kslave.vm.provision "shell", path: "bootstrap_kslave.sh"

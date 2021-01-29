@@ -101,3 +101,9 @@ systemctl restart docker.service
 #agnt name: docker
 #agent image: benhall/dind-jenkins-agent:v2
 #agent -> container setting -> volume: /var/run/docker.sock:/var/run/docker.sock
+
+#export KUBECONFIG=/etc/kubernetes/admin.conf
+
+#kubectl create -f /mnt/kubenetes/test1-deployment/jenkins/jenkins-service.yml
+#kubectl create -f /mnt/kubernetes/test1-deployment/jenkins/fabric8-rbac.yml
+#kubectl create -f /mnt/kubernetes/test1-deployment/jenkins/jenkins-deployment.yml
