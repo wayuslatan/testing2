@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo "[TASK 1] Update /etc/hosts file"
-cat >>/etc/hosts<<EOF
-192.168.2.100 kmaster.wayuslatan.com kmaster
-192.168.2.101 kslave1.wayuslatan.com kslave1
-192.168.2.102 kslave2.wayuslatan.com kslave2
-EOF
+#echo "[TASK 1] Update /etc/hosts file"
+#cat >>/etc/hosts<<EOF
+#192.168.2.100 kmaster.wayuslatan.com kmaster
+#192.168.2.101 kslave1.wayuslatan.com kslave1
+#192.168.2.102 kslave2.wayuslatan.com kslave2
+#EOF
 
 sudo route add default gw 192.168.2.1
 sudo route del default dev enp0s3
