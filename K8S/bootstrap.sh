@@ -104,6 +104,7 @@ systemctl restart docker.service
 
 #agent labels: docker-agent
 #agnt name: docker
+#tcp://kmaster:2735
 #agent image: benhall/dind-jenkins-agent:v2
 #agent -> container setting -> volume: /var/run/docker.sock:/var/run/docker.sock
 

@@ -15,9 +15,6 @@ Vagrant.configure("2") do |config|
       v.cpus = 2
     end
     #ansiblenginx1.vm.provision "shell", path: "bootstrap_ansiblenginx1.sh"
-    config.vm.provision "shell",
-    run: "always",
-    inline: "eval `route -n | awk '{ if ($8 ==\"eth0\" && $2 != \"0.0.0.0\") print \"route del default gw \" $2; }'`"
     config.vm.synced_folder "D:/shared", "/mnt"
   end
 end
