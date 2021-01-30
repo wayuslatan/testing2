@@ -1,10 +1,16 @@
 #!/bin/bash
 
-kubeadm init --apiserver-advertise-address=192.168.2.100 --pod-network-cidr=10.244.0.0/16 >> /root/kubeinit.log 2>/dev/null
+#kubeadm init --apiserver-advertise-address=kmaster.wayuslatan.com:8080 --pod-network-cidr=10.244.0.0/16 >> /root/kubeinit.log 2>/dev/null
 
-mkdir /home/vagrant/.kube
-cp /etc/kubernetes/admin.conf /home/vagrant/.kube/config
-chown -R vagrant:vagrant /home/vagrant/.kube
+kubeadm init --pod-network-cidr=10.244.0.0/16 >> /root/kubeinit.log 2>/dev/null
+
+#mkdir /home/vagrant/.kube
+#cp /etc/kubernetes/admin.conf /home/vagrant/.kube/config
+#chown -R vagrant:vagrant /home/vagrant/.kube
+
+mkdir -p $HOME/.kube
+echo "yes" | sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 sudo export KUBECONFIG=/etc/kubernetes/admin.conf
 
