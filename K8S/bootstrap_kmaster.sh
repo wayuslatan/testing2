@@ -14,6 +14,6 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 sudo export KUBECONFIG=/etc/kubernetes/admin.conf
 
-su - vagrant -c "kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml"
+kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
 
 kubeadm token create --print-join-command > /joincluster.sh

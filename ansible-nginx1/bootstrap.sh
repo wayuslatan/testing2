@@ -17,7 +17,7 @@ echo "[TASK 2] Disable and turn off SWAP"
 sed -i '/swap/d' /etc/fstab
 swapoff -a
 
-apt install nginx
+apt -y install nginx
 systemctl enable nginx
 
 nginx -t #check configuration
