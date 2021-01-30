@@ -88,7 +88,8 @@ sudo service ssh restart
 docker login -u wayuslatan -p Parn.5907123
 
 mkdir /etc/systemd/system/docker.service.d
-cat <<EOT >> docker.conf
+
+cat <<EOT >> /etc/systemd/system/docker.service.d/docker.conf
 [Service]
 ExecStart=
 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
@@ -97,13 +98,15 @@ EOT
 systemctl daemon-reload
 systemctl restart docker.service
 
+#kubectl create -f /mnt/kubenetes/test1-deployment/jenkins/jenkins-service.yml
+#kubectl create -f /mnt/kubernetes/test1-deployment/jenkins/fabric8-rbac.yml
+#kubectl create -f /mnt/kubernetes/test1-deployment/jenkins/jenkins-deployment.yml
+
 #agent labels: docker-agent
 #agnt name: docker
 #agent image: benhall/dind-jenkins-agent:v2
 #agent -> container setting -> volume: /var/run/docker.sock:/var/run/docker.sock
 
-#export KUBECONFIG=/etc/kubernetes/admin.conf
-
-#kubectl create -f /mnt/kubenetes/test1-deployment/jenkins/jenkins-service.yml
-#kubectl create -f /mnt/kubernetes/test1-deployment/jenkins/fabric8-rbac.yml
-#kubectl create -f /mnt/kubernetes/test1-deployment/jenkins/jenkins-deployment.yml
+#kubernetes
+#https://kmaster:6443
+#default
