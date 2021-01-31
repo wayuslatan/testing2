@@ -1,0 +1,1 @@
+{"virtualbox":{"/mnt":{"guestpath":"/mnt","hostpath":"D:/shared","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/vagrant/ansible-nginx1","disabled":false,"__vagrantfile":true}}}

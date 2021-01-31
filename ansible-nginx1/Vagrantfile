@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "ansible-nginx1" do |ansiblenginx1|
     ansiblenginx1.vm.box = "ubuntu/xenial64"
-    ansiblenginx1.vm.hostname = "ansibl-nginx1.wayuslatan.com"
+    ansiblenginx1.vm.hostname = "ansible-nginx1.wayuslatan.com"
     ansiblenginx1.vm.network "public_network", type: "dhcp"
     ansiblenginx1.vm.provider "virtualbox" do |v|
       v.name = "ansible-nginx1"
